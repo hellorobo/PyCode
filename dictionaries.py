@@ -12,4 +12,4 @@ def translate_weekday(day):
         print(week_days.get(day))
 
 
-translate_weekday('Sunday')
+translate_weekday('Wednesday')
