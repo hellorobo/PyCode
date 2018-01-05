@@ -51,3 +51,5 @@ to reload already loaded module
       that's a text inside __doc__ section
       """
   
+  test 123
+  
