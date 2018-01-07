@@ -52,7 +52,7 @@ with open(file_path_2,'a+') as file:
 # note there is no need to close the file
 
 
-#  exercise: merge files
+#  exercise: files merge
 
 folderpath = r'C:\Users\rjakowenko\Documents\700_PYTHON\PyCode\Udemy Python Mega Course\files'
 
@@ -78,3 +78,20 @@ with open(outputfile, 'r') as output:
 
 print('file '+outputfile+' contains following :\n')
 print(result)
+
+
+# a better version of files merge
+
+import glob2
+import datetime
+
+folderpath = r'C:\Users\rjakowenko\Documents\700_PYTHON\PyCode\Udemy Python Mega Course\files'
+outputfile = folderpath + '\output_'+(datetime.datetime.now()).strftime('%Y-%m-%d_%H-%M-%S')+'.txt'
+
+files = glob2.glob(folderpath+'\*')
+
+with open(outputfile, 'w') as output:
+    for file in files:
+        with open(file, 'r') as f:
+            output.write(f.read()+'\n')
+

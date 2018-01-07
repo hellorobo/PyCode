@@ -1,8 +1,12 @@
 import json
+from difflib import get_close_matches
+
 
 folder_path = r"C:\Users\rjakowenko\Documents\700_PYTHON\PyCode\Udemy Python Mega Course\files"
 data = json.load(open(folder_path+'\data.json'))
 word = ''
+reply = ''
+
 
 def listtostring(lst):
     msg = ''
@@ -15,11 +19,11 @@ def listtostring(lst):
 
 def translate(word):
     try:
-        msg = listtostring(data[word.lower()])
+        msg = data[word.lower()]
     except KeyError:
-        msg = 'no such word in my dictionary'
+        msg = '-1'
     except:
-        msg = 'oops! an error occurred'
+        msg = '-9'
     return msg
 
 
@@ -28,6 +32,25 @@ while word.lower() != 'q':
         word = input('enter word to get description or Q to exit: ')
         if word.lower() != 'q':
             print('\n'+word.upper()+' :')
-            print(translate(word))
+            msg = (translate(word))
+            if msg == '-1':
+                reply = ''
+                match = get_close_matches(word, data.keys())[0]
+                if len(match) > 0:
+                    while reply.lower() not in ('y', 'n'):
+                        reply = input("did you mean \"%s\" instead y/n ? " % match.upper())
+                        if reply == 'y':
+                            print('\n' + match.upper() + ' :')
+                            print(listtostring(translate(match)))
+                        elif reply == 'n':
+                            break
+                else:
+                    msg = 'Word not found in dictionary'
+            elif msg == '-9':
+                msg = 'Ooops! Error occurred!'
+            else:
+                print(listtostring(msg))
+        else:
+            print('Goodbye!')
     except:
         print('oh no! there was some error, try again')
