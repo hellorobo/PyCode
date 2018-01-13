@@ -50,6 +50,54 @@ to reload already loaded module
       r"""
       that's a text inside __doc__ section
       """
+  ## Virtual Env
   
-  test 123
+        pip install virtualenv
+        mkdir roboapp1
+        mv flaskapp1/ roboapp1
+        cd roboapp1
+        python -m virtualenv virtual
+        
+        #   ./roboapp1/
+                |
+                |-/flaskapp1/
+                |-/virtual/
+        
+        ./roboapp1/virtual/bin/pip install flask
+        ./roboapp1/virtual/bin/pip install gunicorn
+        
+        #test if webapp1.py runs from virtual python instance
+        ./roboapp1/virtual/bin/python ./roboapp1/flaskapp1/webapp1.py
   
+  ## Heroku
+        sudo apt-get install snapd
+        sudo snap install heroku --classic
+        
+        # check if heroku is installed
+        heroku --version
+        
+        # login to heroku
+        heroku login 
+        
+        # create heroku application container (Dyno)
+        heroku create app_unique_name
+        
+        #display heroku containers
+        heroku apps
+        
+        # get information about deployed apps
+        heroku info
+        
+        # stop heroku dynos
+        heroku ps:scale web=1
+  
+  #### deploy application to Heroku
+  
+        ./roboapp1/virtual/bin/pip freeze > ./roboapp1/flaskapp1/requirements.txt
+        echo 'web: gunicorn webapp1:app1' > ./roboapp1/flaskapp1/Procfile
+        echo 'python-3.6.4.' > ./roboapp1/flaskapp1/runtime.txt
+        git init
+        git add .
+        git commit -m 'message'
+        heroku git:remote --app roboapp1
+        
