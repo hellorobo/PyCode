@@ -30,7 +30,7 @@ def delete_item(connection, table, item):
 
 def update_item(connection, table, item, quantity, price):
     cur = connection.cursor()
-    cur.execute("UPDATE " + table + "SET quantity=?, price=? WHERE item=?", (quantity, price, item))
+    cur.execute("UPDATE " + table + " SET quantity=?, price=? WHERE item=?", (quantity, price, item))
     connection.commit()
 
 
