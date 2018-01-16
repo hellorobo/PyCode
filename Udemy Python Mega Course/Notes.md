@@ -100,4 +100,17 @@ to reload already loaded module
         git add .
         git commit -m 'message'
         heroku git:remote --app roboapp1
+ 
+ # Postgres
+ 
+ install postgres database
+ if there is no c compiler on the system, download precomplied whl file
+ https://www.lfd.uci.edu/~gohlke/pythonlibs/
+ 
+        pip install ~path/psycopg2-2.7.3.2-cp36-cp36m-win32.whl
         
+        # to verify psycopg2 version
+        import psycopg2
+        psycopg2.__version__
+ 
+    
